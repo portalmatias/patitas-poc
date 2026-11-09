@@ -1,0 +1,56 @@
+{
+  "info": {
+    "name": "Patitas PoC - Turnos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base", "value": "http://localhost:4000" },
+    { "key": "fecha", "value": "2026-11-10" }
+  ],
+  "item": [
+    {
+      "name": "1. Listar profesionales",
+      "request": { "method": "GET", "url": "{{base}}/profesionales" }
+    },
+    {
+      "name": "2. Disponibilidad Dra. Gómez",
+      "request": { "method": "GET", "url": "{{base}}/profesionales/1/disponibilidad?fecha={{fecha}}" }
+    },
+    {
+      "name": "3. Registrar turno libre (201)",
+      "request": {
+        "method": "POST",
+        "url": "{{base}}/turnos",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"profesionalId\": 1,\n  \"fecha\": \"{{fecha}}\",\n  \"hora\": \"11:00\",\n  \"duracionMinutos\": 30,\n  \"mascota\": \"Toby (perro)\",\n  \"tutor\": \"Carlos Ruiz\",\n  \"motivo\": \"Control anual\"\n}" }
+      }
+    },
+    {
+      "name": "4. Turno superpuesto (409)",
+      "request": {
+        "method": "POST",
+        "url": "{{base}}/turnos",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"profesionalId\": 1,\n  \"fecha\": \"{{fecha}}\",\n  \"hora\": \"10:30\",\n  \"duracionMinutos\": 30,\n  \"mascota\": \"Mora (gata)\",\n  \"tutor\": \"Paula Sosa\"\n}" }
+      }
+    },
+    {
+      "name": "5. Datos incompletos (400)",
+      "request": {
+        "method": "POST",
+        "url": "{{base}}/turnos",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"profesionalId\": 1,\n  \"fecha\": \"{{fecha}}\"\n}" }
+      }
+    },
+    {
+      "name": "6. Fuera del horario de atención (422)",
+      "request": {
+        "method": "POST",
+        "url": "{{base}}/turnos",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"profesionalId\": 1,\n  \"fecha\": \"{{fecha}}\",\n  \"hora\": \"14:00\",\n  \"mascota\": \"Bruno\",\n  \"tutor\": \"Marta Gil\"\n}" }
+      }
+    }
+  ]
+}
