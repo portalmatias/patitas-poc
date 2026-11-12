@@ -63,7 +63,9 @@ export function agendaRouter(repo: AgendaRepository, hoy: () => string = hoyISO)
         atiende: profesional.diasDeAtencion.includes(diaDeLaSemana(fecha)),
         duracionSlotMinutos: 30,
         disponibles,
-        ocupados: turnos.filter((t) => t.estado === "reservado").map((t) => ({ hora: t.hora, duracionMinutos: t.duracionMinutos })),
+        ocupados: turnos
+          .filter((t) => t.estado === "reservado")
+          .map((t) => ({ id: t.id, hora: t.hora, duracionMinutos: t.duracionMinutos, mascota: t.mascota, tutor: t.tutor, motivo: t.motivo })),
       });
     })
   );

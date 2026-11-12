@@ -50,6 +50,13 @@ describe("GET /profesionales/:id/disponibilidad", () => {
     expect(res.body.disponibles).toContain("10:30");
   });
 
+  it("describe cada turno ocupado para mostrarlo en la agenda", async () => {
+    const res = await request(appConTurnoDeLas10()).get(`/profesionales/1/disponibilidad?fecha=${LUNES}`);
+    expect(res.body.ocupados).toEqual([
+      { id: 1, hora: "10:00", duracionMinutos: 30, mascota: "Luna", tutor: "Ana Torres", motivo: "Vacunación" },
+    ]);
+  });
+
   it("responde 404 si el profesional no existe", async () => {
     const res = await request(appConTurnoDeLas10()).get(`/profesionales/99/disponibilidad?fecha=${LUNES}`);
     expect(res.status).toBe(404);
