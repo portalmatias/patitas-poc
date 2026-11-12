@@ -62,3 +62,12 @@ describe("GET /profesionales/:id/disponibilidad", () => {
     expect(res.status).toBe(404);
   });
 });
+
+describe("Agenda web", () => {
+  it("sirve la pantalla de agenda en la raíz", async () => {
+    const res = await request(appConTurnoDeLas10()).get("/");
+    expect(res.status).toBe(200);
+    expect(res.headers["content-type"]).toMatch(/html/);
+    expect(res.text).toContain("<title>Patitas · Agenda</title>");
+  });
+});

@@ -29,22 +29,16 @@ Datos simulados en memoria. Turnos de ejemplo cargados para la Dra. Gómez el AA
 
 Usen esa fecha en las pruebas. Para correr los tests: `npm test`.
 
-## Frontend: agenda de recepción
+## Pantalla de agenda (demo)
 
-En `web/` está la pantalla de agenda por profesional, hecha con React, TypeScript y Vite a partir del wireframe, la user persona y el user flow del Anexo A de la propuesta. Con la API corriendo, en otra terminal:
-
-```bash
-npm --prefix web install
-npm run web
-```
-
-Abran http://localhost:5173. Vite redirige `/api` a la API en el puerto 4000; para usar otra dirección, definan `API_URL` al levantar Vite o `VITE_API_URL` al compilar.
+Además de Postman, la API sirve una pantalla de agenda por profesional en http://localhost:4000, hecha con HTML, CSS y JavaScript sin frameworks (`public/`) a partir del wireframe, la user persona y el user flow del Anexo A de la propuesta. Se levanta con el mismo `npm run dev`.
 
 - Una pestaña por profesional y la fecha arriba, con los botones ‹ › y **Hoy**.
 - La agenda va en bloques de 30 minutos. Los turnos ocupados muestran mascota, tutor y motivo; un turno largo ocupa varios bloques.
 - Solo los horarios libres se pueden tocar. El formulario ya trae el profesional, la fecha y la hora; se completan la mascota, el tutor, el motivo y la duración.
 - Si otra persona ocupó el horario mientras se cargaban los datos, la API responde 409 y la pantalla avisa y actualiza la agenda en lugar de guardar un turno doble.
-- Las secciones Mascotas y Tutores, y el buscador de tutores del wireframe, quedan para el MVP: la PoC no tiene ABM de tutores.
+
+Es una demo complementaria: la consigna no exige frontend. El frontend del MVP (React, con login por rol, fichas de mascotas, tutores e historia clínica) sigue pendiente. Las secciones Mascotas y Tutores, y el buscador de tutores del wireframe, quedan para el MVP.
 
 ## Endpoints
 

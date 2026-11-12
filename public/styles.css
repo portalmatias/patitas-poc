@@ -392,3 +392,8 @@ h2 {
     transition: none !important;
   }
 }
+
+/* The hidden attribute must win over display rules such as .notice { display: flex } */
+[hidden] {
+  display: none !important;
+}

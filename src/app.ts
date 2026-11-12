@@ -1,3 +1,4 @@
+import path from "path";
 import express from "express";
 import cors from "cors";
 import { AgendaRepository } from "./data/repositorio";
@@ -11,9 +12,8 @@ export function createApp(repo: AgendaRepository, hoy?: () => string) {
   app.use(cors());
   app.use(express.json());
 
-  app.get("/", (_req, res) => {
-    res.json({ mensaje: "API de turnos de Veterinaria Patitas (PoC)", datos: "simulados en memoria" });
-  });
+  // Pantalla de agenda (HTML + JS sin build): la carpeta public/ se sirve en la raíz.
+  app.use(express.static(path.join(__dirname, "..", "public")));
 
   app.use(agendaRouter(repo, hoy));
   app.use(notFoundHandler);

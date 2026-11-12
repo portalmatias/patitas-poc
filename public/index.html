@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patitas · Agenda</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <span class="brand">Patitas</span>
+      <nav aria-label="Secciones">
+        <a href="/" aria-current="page">Agenda</a>
+        <span class="nav-disabled" title="Disponible en el MVP">Mascotas</span>
+        <span class="nav-disabled" title="Disponible en el MVP">Tutores</span>
+      </nav>
+      <span class="user">Carla · Recepción</span>
+    </header>
+
+    <main class="content">
+      <div class="toolbar">
+        <div id="profesionales" class="tabs" role="tablist" aria-label="Profesionales"></div>
+
+        <div class="date-nav">
+          <div class="date-picker">
+            <button type="button" id="dia-anterior" aria-label="Día anterior">‹</button>
+            <span id="fecha" aria-live="polite"></span>
+            <button type="button" id="dia-siguiente" aria-label="Día siguiente">›</button>
+          </div>
+          <button type="button" id="hoy" class="btn">Hoy</button>
+        </div>
+      </div>
+
+      <div id="aviso" class="notice" hidden>
+        <span id="aviso-texto"></span>
+        <button type="button" id="aviso-cerrar" aria-label="Cerrar aviso">×</button>
+      </div>
+
+      <div class="layout">
+        <section class="panel">
+          <ol id="agenda" class="agenda" aria-label="Horarios del día"></ol>
+          <p id="agenda-vacia" class="empty" hidden></p>
+          <ul class="legend" aria-label="Referencias">
+            <li><span class="swatch slot-busy" aria-hidden="true"></span> Ocupado</li>
+            <li><span class="swatch slot-free" aria-hidden="true"></span> Libre</li>
+            <li><span class="swatch slot-selected" aria-hidden="true"></span> Seleccionado</li>
+          </ul>
+        </section>
+
+        <aside id="ayuda" class="panel form-hint">
+          <h2>Nuevo turno</h2>
+          <p>Tocá un horario libre de la agenda para reservarlo.</p>
+        </aside>
+
+        <form id="formulario" class="panel form" aria-labelledby="titulo-form" hidden>
+          <h2 id="titulo-form">Nuevo turno</h2>
+
+          <div class="field">
+            <span class="field-label">Profesional y horario</span>
+            <p id="resumen" class="field-static"></p>
+          </div>
+
+          <div class="field">
+            <label for="mascota">Mascota</label>
+            <input id="mascota" name="mascota" required placeholder="Ej.: Toby (perro)" />
+          </div>
+
+          <div class="field">
+            <label for="tutor">Tutor</label>
+            <input id="tutor" name="tutor" required placeholder="Nombre y apellido" />
+          </div>
+
+          <div class="field">
+            <label for="motivo">Motivo</label>
+            <input id="motivo" name="motivo" />
+          </div>
+
+          <div class="field">
+            <label for="duracion">Duración</label>
+            <select id="duracion" name="duracion">
+              <option value="15">15 min</option>
+              <option value="30" selected>30 min</option>
+              <option value="45">45 min</option>
+              <option value="60">60 min</option>
+              <option value="90">90 min</option>
+            </select>
+          </div>
+
+          <div id="errores" class="form-error" role="alert" hidden></div>
+
+          <div class="form-actions">
+            <button type="button" id="cancelar" class="btn">Cancelar</button>
+            <button type="submit" id="confirmar" class="btn btn-primary">Confirmar</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
